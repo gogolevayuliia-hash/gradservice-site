@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Град-Сервис — восстановление автомобилей после града (Краснодар)</title>
+<meta name="description" content="Град-Сервис — ремонт вмятин после града по технологии PDR без покраски. Работаем напрямую со страховыми. Краснодар, ул. Кропоткина, 50.">
+<style>
+  :root{
+    --ink:#17242e; --muted:#5c6b78; --line:#e2e8ef; --brand:#12558a; --brand-2:#1f7ac0;
+    --accent:#eaf3fb; --good:#137a4b; --bg:#eef3f8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.65;font-size:16px}
+  a{color:var(--brand)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--brand);font-size:19px;text-decoration:none}
+  .logo .mark{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px}
+  .nav .tel{text-decoration:none;font-weight:800;color:var(--ink);font-size:17px;white-space:nowrap}
+  .nav .tel small{display:block;font-weight:600;font-size:11px;color:var(--muted);text-align:right}
+
+  /* hero */
+  .hero{background:linear-gradient(135deg,#0f4c7f,#1f7ac0);color:#fff;position:relative;overflow:hidden}
+  .hero:before{content:"🌩";position:absolute;right:-10px;top:-30px;font-size:260px;opacity:.08;transform:rotate(-8deg)}
+  .hero .wrap{padding:64px 20px 60px;position:relative}
+  .hero h1{font-size:42px;line-height:1.12;margin:0 0 16px;font-weight:800;max-width:15ch}
+  .hero p.sub{font-size:19px;opacity:.95;max-width:52ch;margin:0 0 28px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:800;font-size:16px;
+    padding:14px 24px;border-radius:12px;transition:.15s}
+  .btn.primary{background:#fff;color:var(--brand)}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+  .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .hero .addr{margin-top:22px;font-size:15px;opacity:.9}
+
+  /* sections */
+  section.block{padding:56px 0}
+  h2{font-size:28px;margin:0 0 8px;color:var(--ink)}
+  .lead{color:var(--muted);font-size:17px;margin:0 0 30px;max-width:60ch}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+  .card .ic{width:48px;height:48px;border-radius:12px;background:var(--accent);display:flex;align-items:center;
+    justify-content:center;font-size:24px;margin-bottom:14px}
+  .card h3{margin:0 0 6px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+
+  /* steps */
+  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px 22px 22px;position:relative}
+  .step:before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:22px;
+    width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:16px}
+  .step h3{margin:14px 0 5px;font-size:17px}
+  .step p{margin:0;color:var(--muted);font-size:14.5px}
+  .step .term{margin-top:8px;font-size:13px;color:var(--brand);font-weight:700}
+
+  .band{background:linear-gradient(135deg,#12558a,#1f7ac0);color:#fff;border-radius:20px;padding:34px 30px;
+    display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .band h2{color:#fff;margin:0}
+  .band p{margin:6px 0 0;opacity:.92}
+
+  /* contacts */
+  .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:8px}
+  .contact{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:14px;padding:20px 22px}
+  .contact .who{font-size:13px;color:var(--muted);margin-bottom:4px}
+  .contact a.ph{font-size:24px;font-weight:800;color:var(--ink);text-decoration:none;display:block}
+  .contact .note{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+  footer{background:#0f2a44;color:#c7d6e6;padding:34px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer .logo{color:#fff}
+  footer a{color:#9cc4ea}
+
+  @media(max-width:640px){
+    .hero h1{font-size:32px}.hero p.sub{font-size:17px}
+    h2{font-size:24px}.nav .tel small{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="mark">🚗</span> Град-Сервис</a>
+    <a class="tel" href="tel:+79933133003">8 993 313 30 03<small>звоните — поможем</small></a>
+  </div>
+</header>
+
+<div id="top"></div>
+<div class="hero">
+  <div class="wrap">
+    <h1>Восстановление автомобилей после града</h1>
+    <p class="sub">Убираем вмятины от града по технологии <b>PDR — без покраски</b>, с сохранением заводского лакокрасочного покрытия. Работаем напрямую со страховыми компаниями.</p>
+    <div class="cta">
+      <a class="btn primary" href="tel:+79933133003">📞 Позвонить</a>
+      <a class="btn ghost" href="#process">Как проходит ремонт</a>
+    </div>
+    <div class="addr">📍 Краснодар, ул. Кропоткина, 50 &nbsp;·&nbsp; осмотр и ремонт по записи</div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Что мы делаем</h2>
+  <p class="lead">Специализируемся на удалении градобойных вмятин. Восстанавливаем кузов аккуратно и без покраски там, где это возможно — автомобиль сохраняет заводское покрытие и рыночную стоимость.</p>
+  <div class="cards">
+    <div class="card"><div class="ic">🔧</div><h3>PDR — без покраски</h3><p>Беспокрасочное удаление вмятин: металл выправляется изнутри, родное ЛКП остаётся нетронутым.</p></div>
+    <div class="card"><div class="ic">🏦</div><h3>Работаем со страховой</h3><p>Мы — партнёр страховых компаний. Все документы по осмотру и ремонту передаём страховщику сами.</p></div>
+    <div class="card"><div class="ic">📋</div><h3>Всё оформление — на нас</h3><p>Проводим осмотр, составляем дефектовочный лист, ведём согласование. Вам не нужно бегать с бумагами.</p></div>
+    <div class="card"><div class="ic">⚡</div><h3>Быстро и по записи</h3><p>Осмотр — в день приезда, около 1,5 часов. Ремонт — от нескольких часов в зависимости от объёма.</p></div>
+  </div>
+</section>
+
+<section class="block wrap" id="process">
+  <h2>Как проходит ремонт</h2>
+  <p class="lead">Прозрачный процесс от осмотра до выдачи — вы всегда знаете, на каком этапе ваш автомобиль.</p>
+  <div class="steps">
+    <div class="step"><h3>Осмотр</h3><p>Фиксируем все вмятины от града, составляем дефектовочный лист.</p><div class="term">в день приезда · ≈ 1,5 ч</div></div>
+    <div class="step"><h3>Согласование</h3><p>Передаём документы в вашу страховую и ведём согласование ремонта.</p><div class="term">обычно 5–7 дней</div></div>
+    <div class="step"><h3>Ремонт</h3><p>Восстанавливаем кузов по технологии PDR. Свяжемся и согласуем удобные даты.</p><div class="term">от 3 часов</div></div>
+    <div class="step"><h3>Выдача</h3><p>Принимаете автомобиль, проверяете качество, подписываете акт.</p><div class="term">по готовности</div></div>
+  </div>
+</section>
+
+<section class="block wrap">
+  <div class="band">
+    <div>
+      <h2>Попал под град?</h2>
+      <p>Позвоните — подскажем, как действовать со страховой, и запишем на осмотр.</p>
+    </div>
+    <a class="btn primary" href="tel:+79933133003">📞 8 993 313 30 03</a>
+  </div>
+</section>
+
+<section class="block wrap" id="contacts">
+  <h2>Контакты</h2>
+  <p class="lead">Краснодар, ул. Кропоткина, 50 — ориентир вывеска «Автомир». Осмотр и ремонт по записи.</p>
+  <div class="contacts">
+    <div class="contact">
+      <div class="who">Общие вопросы, как добраться — Денис</div>
+      <a class="ph" href="tel:+79933133003">8 993 313 30 03</a>
+    </div>
+    <div class="contact">
+      <div class="who">Запись, перенос осмотра или ремонта — Анна</div>
+      <a class="ph" href="tel:+79226526370">8 922 652 63 70</a>
+    </div>
+    <div class="contact">
+      <div class="who">Адрес</div>
+      <a class="ph" href="https://yandex.ru/maps/?text=Краснодар,+улица+Кропоткина,+50" target="_blank" rel="noopener" style="font-size:18px">ул. Кропоткина, 50 →</a>
+      <div class="note">Краснодар · вывеска «Автомир»</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mark">🚗</span> Град-Сервис</a>
+    <div>Восстановление автомобилей после града · Краснодар · gradservice.su</div>
+    <div>© 2026 Град-Сервис</div>
+  </div>
+</footer>
+
+</body>
+</html>
