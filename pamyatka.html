@@ -1,251 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Памятка для клиента — Град-Сервис</title>
+<title>Памятка для клиента - Град-Сервис</title>
 <style>
-  :root{
-    --ink:#17242e; --muted:#5c6b78; --line:#e2e8ef; --brand:#12558a; --brand-2:#1f7ac0;
-    --accent:#eaf3fb; --good:#137a4b; --good-bg:#e7f6ee; --good-line:#c2e6d2;
-    --warn:#9a5a00; --warn-bg:#fff5e4; --warn-line:#f2d8a4; --danger:#b3261e;
+  :root {
+    --navy:#123b5d; --blue:#176da5; --sky:#eaf4fb; --ink:#172733;
+    --muted:#5b6c78; --line:#dbe5ec; --paper:#fff; --soft:#f5f8fa;
+    --amber:#9a5a00; --amber-bg:#fff5df; --green:#196b4b; --green-bg:#eaf7f0;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:#e9eef4;color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size:14.5px;line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .page{width:min(210mm,100%);margin:14px auto;background:#fff;
-    padding:clamp(16px,4.5vw,20mm) clamp(14px,4.5vw,18mm);
-    box-shadow:0 8px 30px rgba(20,50,80,.14);position:relative}
-  .page + .page{margin-top:26px}   /* секции текут подряд, без принудительного разрыва листа */
-
-  /* Шапка бренда */
-  .brand{display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--brand);padding-bottom:14px;margin-bottom:20px}
-  .brand .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
-    color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
-  .brand .name{font-size:20px;font-weight:800;letter-spacing:.2px;color:var(--brand)}
-  .brand .tag{font-size:12.5px;color:var(--muted)}
-  .doc-title{font-size:27px;font-weight:800;margin:6px 0 2px}
-  .lead{color:var(--muted);margin:0 0 4px}
-
-  h2{font-size:19px;margin:26px 0 10px;display:flex;align-items:center;gap:10px;color:var(--brand)}
-  h2 .ic{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
-  h3{font-size:15.5px;margin:16px 0 6px}
-  p{margin:0 0 10px}
-  ul,ol{margin:6px 0 12px;padding-left:22px} li{margin:5px 0}
-  b,strong{color:#0e1c26}
-
-  .grid{display:flex;gap:14px;flex-wrap:wrap}
-  .card{flex:1;min-width:220px;background:#fafcfe;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-  .card .k{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:3px}
-  .card .v{font-size:16px;font-weight:700}
-
-  .box{border-radius:12px;padding:13px 16px;margin:14px 0;border:1px solid}
-  .box .t{font-weight:700;margin-bottom:3px;display:flex;gap:7px;align-items:center}
-  .box p:last-child{margin-bottom:0}
-  .box.good{background:var(--good-bg);border-color:var(--good-line)}.box.good .t{color:var(--good)}
-  .box.warn{background:var(--warn-bg);border-color:var(--warn-line)}.box.warn .t{color:var(--warn)}
-  .box.info{background:var(--accent);border-color:#cfe2f4}.box.info .t{color:var(--brand)}
-
-  .steps{margin:14px 0}
-  table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid var(--line);font-size:13.5px}
-  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
-  th{background:var(--brand);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
-  tr:last-child td{border-bottom:none}
-  tbody tr:nth-child(even){background:#f7fafd}
-  td.stage{font-weight:700;color:var(--brand);white-space:nowrap;width:150px}
-  td.term{color:var(--muted);width:180px}
-
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;text-decoration:none;
-    font-weight:700;padding:11px 18px;border-radius:10px;font-size:14px}
-  .contacts{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
-  .contact{flex:1;min-width:240px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:12px 15px}
-  .contact .who{font-size:12px;color:var(--muted)}
-  .contact a{font-size:19px;font-weight:800;color:var(--ink);text-decoration:none;display:block}
-
-  .faq{margin:6px 0 0}
-  .faq .q{font-weight:700;margin-top:14px}
-  .faq .a{color:#2a3a45}
-  .faq .q:before{content:"❓ ";}
-
-  .foot{margin-top:26px;padding-top:14px;border-top:2px solid var(--line);color:var(--brand);font-weight:700}
-  .pnum{position:absolute;bottom:9mm;right:16mm;color:#9fb0bf;font-size:12px}
-
-  @media print{
-    body{background:#fff}
-    .page{width:auto;margin:0;padding:0;box-shadow:none}
-    .page + .page{margin-top:16px}
-    .pnum{display:none}
-    a{color:inherit;text-decoration:none}
-    /* ничего не режем посередине листа */
-    .box, .grid, .card, .contacts, figure, .faq .q, .faq .a{break-inside:avoid}
-    tr{break-inside:avoid}          /* таблица может перетекать между строками, но строку не режем */
-    h2, h3{break-after:avoid}
-    img{max-width:100%}
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    background:#dfe6eb; color:var(--ink);
+    font-family:"DejaVu Sans", Arial, sans-serif;
+    font-size:9.35pt; line-height:1.34;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
-  @page{size:A4;margin:14mm}
+  @page { size:A4; margin:10mm; }
+  .sheet {
+    width:190mm; min-height:277mm; margin:8mm auto; padding:0;
+    background:var(--paper); position:relative; page-break-after:always;
+    box-shadow:0 8px 28px rgba(20,45,65,.16);
+  }
+  .sheet:last-child { page-break-after:auto; }
+  .topbar { height:5mm; background:linear-gradient(90deg,var(--navy),var(--blue)); }
+  .header { display:flex; justify-content:space-between; align-items:center; padding:5mm 7mm 3.5mm; border-bottom:1px solid var(--line); }
+  .brand { display:flex; align-items:center; gap:3mm; }
+  .mark { width:10mm; height:10mm; border-radius:3mm; display:flex; align-items:center; justify-content:center; flex:none; background:var(--navy); color:#fff; font-size:15pt; font-weight:800; }
+  .brand-name { font-size:14pt; line-height:1; font-weight:800; color:var(--navy); white-space:nowrap; }
+  .brand-sub { font-size:7.3pt; color:var(--muted); margin-top:1mm; }
+  .page-label { color:var(--muted); font-size:7.5pt; text-align:right; }
+  .content { padding:4.5mm 7mm 12mm; }
+  h1 { margin:0 0 1mm; font-size:22pt; line-height:1.05; color:var(--navy); letter-spacing:-.35pt; }
+  .lead { margin:0 0 3.5mm; color:var(--muted); font-size:9.3pt; max-width:165mm; }
+  h2 { margin:4.2mm 0 2.2mm; font-size:13.2pt; line-height:1.15; color:var(--navy); display:flex; align-items:center; gap:2.2mm; }
+  h2 .num { width:7mm; height:7mm; border-radius:2mm; display:flex; align-items:center; justify-content:center; background:var(--navy); color:#fff; font-size:8.5pt; flex:none; }
+  h3 { margin:0 0 1.4mm; font-size:9.5pt; color:var(--navy); }
+  p { margin:0 0 2mm; }
+  a { color:inherit; }
+  .quick { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:2mm; margin:3.2mm 0; }
+  .quick-card { display:block; border:1px solid var(--line); background:var(--soft); border-radius:2.5mm; padding:2.5mm 3mm; min-height:16mm; }
+  .eyebrow { display:block; color:var(--muted); text-transform:uppercase; font-size:6.6pt; letter-spacing:.4pt; margin-bottom:1mm; }
+  .quick-card strong { display:block; color:var(--navy); font-size:10.3pt; }
+  .action { background:var(--navy); color:#fff; text-decoration:none; }
+  .action .eyebrow { color:#cde3f3; }
+  .action strong { color:#fff; }
+  .route { display:grid; grid-template-columns:.9fr 1.25fr; gap:3mm; align-items:start; }
+  .steps { list-style:none; padding:0; margin:0; counter-reset:route; }
+  .steps li { counter-increment:route; position:relative; padding:0 0 2.5mm 9mm; }
+  .steps li:before { content:counter(route); position:absolute; left:0; top:-.3mm; width:6mm; height:6mm; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--sky); color:var(--blue); font-weight:800; font-size:8pt; }
+  .photos { display:grid; grid-template-columns:1fr 1fr; gap:2.5mm; }
+  figure { margin:0; }
+  figure img { width:100%; height:48mm; display:block; object-fit:cover; border-radius:2.5mm; border:1px solid var(--line); }
+  figcaption { margin-top:1.1mm; color:var(--muted); font-size:7.2pt; line-height:1.25; }
+  .note { padding:2.5mm 3mm; border-radius:2.5mm; border:1px solid; margin:2.8mm 0; }
+  .note strong { display:block; margin-bottom:.8mm; }
+  .note.info { background:var(--sky); border-color:#cde2f1; color:#24485f; }
+  .note.warn { background:var(--amber-bg); border-color:#eed39c; color:#6f4608; }
+  .note.good { background:var(--green-bg); border-color:#c7e5d5; color:#245c46; }
+  .prep { display:grid; grid-template-columns:.9fr 1.25fr; gap:3mm; }
+  .clean { background:var(--amber-bg); border:1px solid #eed39c; border-radius:2.5mm; padding:3mm; }
+  .clean .big { display:flex; align-items:center; gap:2mm; font-size:11.2pt; color:var(--amber); font-weight:800; margin-bottom:1mm; }
+  .important-icon { color:#c27300; font-family:"DejaVu Sans",sans-serif; font-size:17pt; line-height:1; flex:none; }
+  .documents { padding:2.4mm 3mm; background:var(--soft); border:1px solid var(--line); border-radius:2.5mm; }
+  .docs-head { display:flex; align-items:center; gap:2mm; color:var(--navy); margin-bottom:1.5mm; }
+  .doc-icon { width:5mm; height:6.5mm; display:inline-block; position:relative; flex:none; border:1.2px solid var(--blue); border-radius:.7mm; background:#fff; }
+  .doc-icon:before, .doc-icon:after { content:""; position:absolute; left:1mm; right:1mm; height:1px; background:#8eb8d3; }
+  .doc-icon:before { top:2.3mm; }
+  .doc-icon:after { top:4mm; }
+  .checklist { margin:0; padding:0; display:block; list-style:none; }
+  .checklist li { display:block; margin:0 0 1.2mm; }
+  .checklist li:last-child { margin-bottom:0; }
+  .checklist li:before { content:"✓"; color:var(--green); font-weight:900; margin-right:1.5mm; }
+  .contacts { display:grid; grid-template-columns:1fr 1fr; gap:2.5mm; margin-top:3mm; }
+  .contact { border-left:1.2mm solid var(--blue); background:var(--soft); padding:2.4mm 3mm; border-radius:1.5mm; }
+  .contact small { display:block; color:var(--muted); margin-bottom:.6mm; }
+  .contact a { font-size:12pt; font-weight:800; color:var(--navy); text-decoration:none; }
+  .process { display:grid; gap:1.6mm; margin-top:2mm; }
+  .process-row { display:grid; grid-template-columns:9mm 34mm 1fr 38mm; gap:2.5mm; align-items:start; padding:2.2mm 2.5mm; border:1px solid var(--line); border-radius:2.2mm; break-inside:avoid; }
+  .process-row:nth-child(even) { background:var(--soft); }
+  .step-no { width:7mm; height:7mm; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--navy); color:#fff; font-weight:800; font-size:7.8pt; }
+  .stage { color:var(--navy); font-weight:800; }
+  .term { color:var(--muted); font-size:8.2pt; padding-left:2.5mm; }
+  .rules { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.5mm; margin-top:2.5mm; }
+  .rule { background:var(--soft); border:1px solid var(--line); border-radius:2.5mm; padding:3mm; }
+  .rule h3 { font-size:9.2pt; }
+  .rule ul { margin:1.5mm 0 0; padding-left:4.5mm; }
+  .rule li { margin-bottom:1mm; }
+  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.4mm; margin-top:2.5mm; }
+  .faq { border:1px solid var(--line); border-radius:2.5mm; padding:2.8mm 3mm; break-inside:avoid; }
+  .faq .q { color:var(--navy); font-weight:800; margin-bottom:1.1mm; }
+  .faq .q:before { content:"?"; display:inline-flex; align-items:center; justify-content:center; width:5mm; height:5mm; margin-right:1.5mm; border-radius:50%; background:var(--sky); color:var(--blue); font-size:8pt; }
+  .faq p:last-child { margin-bottom:0; color:#344956; font-size:8.6pt; }
+  .summary { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.3mm; margin:3mm 0; }
+  .summary > div { background:var(--navy); color:#fff; border-radius:2.5mm; padding:2.8mm 3mm; }
+  .summary strong { display:block; margin-bottom:.7mm; font-size:9.3pt; }
+  .summary span { color:#d7e8f4; font-size:8pt; }
+  .closing { margin-top:3mm; padding:3mm 4mm; background:var(--sky); border-radius:2.5mm; display:flex; justify-content:space-between; align-items:center; gap:5mm; }
+  .closing strong { color:var(--navy); font-size:11pt; }
+  .footer { position:absolute; left:7mm; right:7mm; bottom:4mm; display:flex; justify-content:space-between; border-top:1px solid var(--line); padding-top:2mm; color:#7a8994; font-size:7pt; }
+  @media print {
+    body { background:#fff; }
+    .sheet { margin:0; box-shadow:none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ================= СТРАНИЦА 1: как добраться ================= -->
-<section class="page">
-  <div class="brand">
-    <div class="logo">🚗</div>
-    <div>
-      <div class="name">Град-Сервис</div>
-      <div class="tag">Восстановление автомобилей после града</div>
+<section class="sheet">
+  <div class="topbar"></div>
+  <header class="header">
+    <div class="brand"><div class="mark">Г</div><div><div class="brand-name">Град-Сервис</div><div class="brand-sub">Восстановление автомобилей после града</div></div></div>
+    <div class="page-label">Памятка клиента<br>страница 1 из 3</div>
+  </header>
+  <main class="content">
+    <h1>Перед визитом</h1>
+    <p class="lead">Адрес, схема въезда и короткий список того, что нужно подготовить.</p>
+
+    <div class="quick">
+      <div class="quick-card"><span class="eyebrow">Адрес</span><strong>ул. Кропоткина, 50</strong><span>ориентир - вывеска «Автомир»</span></div>
+      <a class="quick-card action" href="https://yandex.ru/maps?ol=geo&amp;text=%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9A%D1%80%D0%BE%D0%BF%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0,%2050&amp;sll=38.948696,45.043069&amp;sspn=0.005821,0.008210&amp;si=eeztufe12tx6y8xghztz0fn6y4"><span class="eyebrow">Нажмите в PDF</span><strong>Открыть карту →</strong></a>
+      <a class="quick-card action" href="https://gradservice.su/video-klientam.mp4"><span class="eyebrow">Нажмите в PDF</span><strong>Видео проезда →</strong></a>
     </div>
-  </div>
 
-  <div class="doc-title">Памятка для клиента</div>
-  <p class="lead">Уважаемый клиент! Благодарим за обращение. Здесь — всё, что нужно знать перед визитом и о том, как пройдёт восстановление вашего автомобиля.</p>
-
-  <h2><span class="ic">📍</span> Как добраться</h2>
-  <div class="grid">
-    <div class="card"><div class="k">Адрес</div><div class="v">ул. Кропоткина, 50</div></div>
-    <div class="card"><div class="k">Ориентир</div><div class="v">вывеска «Автомир»</div></div>
-  </div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 4px">
-    <a class="btn" href="https://gradservice.su/video-klientam.mp4" target="_blank">▶ Видео: как до нас доехать</a>
-    <a class="btn" href="https://yandex.ru/maps?ol=geo&text=%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9A%D1%80%D0%BE%D0%BF%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0,%2050&sll=38.948696,45.043069&sspn=0.005821,0.008210&si=eeztufe12tx6y8xghztz0fn6y4" target="_blank" style="background:#eef3fb;color:var(--brand);border:1px solid #cfe0f2">🗺 Открыть в Яндекс.Картах</a>
-  </div>
-
-  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-top:8px">
-    <div style="flex:1;min-width:230px">
-      <h3 style="margin-top:0">Как проехать</h3>
-      <ol style="margin-top:6px">
-        <li>После въезда на территорию двигайтесь прямо до <b>оранжевых выцветших ворот со шлагбаумом</b>.</li>
-        <li>Над воротами — <b>ограничитель высоты 2,2 метра</b> (обратите внимание, если у вас высокий автомобиль).</li>
-        <li>На КПП скажите: <b>«Мы по поводу ремонта после града»</b> — вас пропустят.</li>
+    <h2><span class="num">1</span> Как проехать</h2>
+    <div class="route">
+      <ol class="steps">
+        <li>После въезда на территорию двигайтесь прямо до <strong>оранжевых выцветших ворот со шлагбаумом</strong>.</li>
+        <li>Над воротами установлен <strong>ограничитель высоты 2,2 м</strong>. Учтите это, если автомобиль высокий.</li>
+        <li>На КПП скажите: <strong>«Мы по поводу ремонта после града»</strong> - вас пропустят.</li>
       </ol>
-      <figure style="margin:12px 0 0;max-width:210px">
-        <img src="foto-vezd.jpg" alt="Въезд во двор" style="width:100%;border-radius:10px;border:1px solid var(--line)">
-        <figcaption style="font-size:12.5px;color:var(--muted);margin-top:5px">Въезд во двор. Обратите внимание на <b>ограничитель высоты 2,2 м</b>.</figcaption>
-      </figure>
+      <div class="photos">
+        <figure><img src="foto-avtomir.jpg" alt="Вывеска Автомир"><figcaption>Ищите вывеску «Автомир · Кропоткина, 50» и заезжайте под ней.</figcaption></figure>
+        <figure><img src="foto-vezd.jpg" alt="Въезд во двор"><figcaption>Въезд во двор. Над воротами - ограничитель высоты 2,2 м.</figcaption></figure>
+      </div>
     </div>
-    <figure style="flex:1;min-width:240px;margin:0">
-      <img src="foto-avtomir.jpg" alt="Вывеска Автомир" style="width:100%;border-radius:10px;border:1px solid var(--line)">
-      <figcaption style="font-size:12.5px;color:var(--muted);margin-top:5px">Ищите вывеску <b>«Автомир · Кропоткина, 50»</b> (обведена красным) — заезжайте под ней.</figcaption>
-    </figure>
-  </div>
+    <div class="note info"><strong>В документах страховой указан другой адрес?</strong>Это нормально: там может быть юридический адрес или другое подразделение. Осмотр и ремонт проходят по адресу <strong>ул. Кропоткина, 50</strong></div>
 
-  <div class="box info" style="margin-top:16px">
-    <div class="t">ℹ️ Про адрес в документах страховой</div>
-    <p>В документах страховой может быть указан другой адрес — это нормально. Осмотр и ремонт проводятся именно по нашему адресу: <b>ул. Кропоткина, 50</b>.</p>
-  </div>
+    <h2><span class="num">2</span> Что подготовить</h2>
+    <div class="prep">
+      <div class="clean"><div class="big"><span class="important-icon">⚠</span><span>Приезжайте на чистом автомобиле</span></div>На грязном кузове нельзя качественно зафиксировать все повреждения. Осмотр придётся перенести или провести позже, если в графике будет окно.</div>
+      <div class="documents">
+        <div class="docs-head"><span class="doc-icon"></span><strong>Возьмите с собой</strong></div>
+        <ul class="checklist">
+          <li>паспорт</li><li>СТС</li><li>водительское удостоверение</li><li>полис ОСАГО / КАСКО, если есть</li><li>все документы, полученные в страховой компании</li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="contacts">
-    <div class="contact"><div class="who">Если заблудитесь в дороге — Денис</div><a href="tel:+79933133003">8 993 313 30 03</a></div>
-    <div class="contact"><div class="who">Запись, перенос осмотра или ремонта — Анна</div><a href="tel:+79226526370">8 922 652 63 70</a></div>
-  </div>
-  <div class="pnum">Град-Сервис · 1</div>
+    <div class="contacts">
+      <div class="contact"><small>Заблудились в дороге - Денис</small><a href="tel:+79933133003">8 993 313 30 03</a></div>
+      <div class="contact"><small>Запись, перенос осмотра или ремонта - Анна</small><a href="tel:+79226526370">8 922 652 63 70</a></div>
+    </div>
+  </main>
+  <footer class="footer"><span>Град-Сервис · памятка клиента</span><span>Сохраните этот файл до окончания ремонта</span></footer>
 </section>
 
-<!-- ================= СТРАНИЦА 2: перед приездом + процесс ================= -->
-<section class="page">
-  <h2><span class="ic">✅</span> Что нужно перед приездом</h2>
+<section class="sheet">
+  <div class="topbar"></div>
+  <header class="header">
+    <div class="brand"><div class="mark">Г</div><div><div class="brand-name">Град-Сервис</div><div class="brand-sub">Осмотр, согласование и восстановление</div></div></div>
+    <div class="page-label">Как всё проходит<br>страница 2 из 3</div>
+  </header>
+  <main class="content">
+    <h1>От осмотра до выдачи</h1>
+    <p class="lead">Шесть этапов. Срок согласования зависит от страховой, срок ремонта - от объёма повреждений.</p>
 
-  <div class="box warn">
-    <div class="t">🚿 Автомобиль должен быть чистым!</div>
-    <p>Это важно для качественной фиксации всех повреждений. Грязный автомобиль осматривать нельзя — придётся перенести запись.</p>
-  </div>
+    <div class="process">
+      <div class="process-row"><span class="step-no">1</span><span class="stage">Осмотр</span><span>Фиксируем вмятины от града и составляем дефектовочный лист по повреждённым элементам.</span><span class="term">В день приезда<br>около 1,5 часа</span></div>
+      <div class="process-row"><span class="step-no">2</span><span class="stage">Документы</span><span>Передаём комплект документов в вашу страховую компанию для согласования ремонта.</span><span class="term">1-2 рабочих дня после осмотра</span></div>
+      <div class="process-row"><span class="step-no">3</span><span class="stage">Согласование</span><span>Страховая рассматривает материалы и принимает решение по ремонту.</span><span class="term">Обычно 5-7 дней, зависит от страховой</span></div>
+      <div class="process-row"><span class="step-no">4</span><span class="stage">Запись</span><span>После согласования связываемся с вами и предлагаем удобные даты.</span><span class="term">Сразу после согласования; ориентир - около 2 недель от осмотра</span></div>
+      <div class="process-row"><span class="step-no">5</span><span class="stage">Ремонт</span><span>Восстанавливаем кузов автомобиля без покраски.</span><span class="term">От 3 часов до 2 суток</span></div>
+      <div class="process-row"><span class="step-no">6</span><span class="stage">Выдача</span><span>Вы проверяете качество автомобиля и подписываете акт приёма-передачи.</span><span class="term">По завершении ремонта</span></div>
+    </div>
 
-  <h3>Возьмите с собой</h3>
-  <ul>
-    <li>паспорт;</li>
-    <li>свидетельство о регистрации ТС (СТС);</li>
-    <li>водительское удостоверение;</li>
-    <li>полис ОСАГО / КАСКО (если есть);</li>
-    <li>все документы, которые вы получили в страховой компании.</li>
-  </ul>
+    <div class="note warn"><strong>Почему нельзя начать раньше</strong>Мы не можем приступить к ремонту до официального согласования страховой. Вопросы о сроках рассмотрения находятся в компетенции вашей страховой компании.</div>
 
-  <h2><span class="ic">🔧</span> Как будет проходить процесс</h2>
-  <p>После того как специалисты проведут осмотр и зафиксируют повреждения:</p>
-  <div class="steps">
-  <table>
-    <thead><tr><th>Этап</th><th>Что происходит</th><th>Срок</th></tr></thead>
-    <tbody>
-      <tr><td class="stage">Осмотр</td><td>Специалисты фиксируют все вмятины от града, составляют дефектовочный лист с перечнем повреждённых элементов</td><td class="term">В день приезда, длительность ≈ 1,5 часа</td></tr>
-      <tr><td class="stage">Передача документов</td><td>Все документы передаются в вашу страховую компанию для согласования ремонта</td><td class="term">1–2 рабочих дня после осмотра</td></tr>
-      <tr><td class="stage">Ожидание согласования</td><td>Страховая рассматривает документы и принимает решение</td><td class="term">Зависит от страховой — около 5–7 дней</td></tr>
-      <tr><td class="stage">Запись на ремонт</td><td>После согласования мы свяжемся с вами и предложим удобные даты</td><td class="term">Сразу после согласования — примерно 2 недели с момента осмотра</td></tr>
-      <tr><td class="stage">Ремонт</td><td>Непосредственно восстановление автомобиля</td><td class="term">Зависит от объёма: от 3 часов до 2 суток</td></tr>
-      <tr><td class="stage">Выдача</td><td>Вы принимаете автомобиль, проверяете качество и подписываете акт приёма-передачи</td><td class="term">По завершении ремонта</td></tr>
-    </tbody>
-  </table>
-  </div>
+    <h2><span class="num">!</span> Если планы изменились</h2>
+    <div class="rules">
+      <article class="rule"><h3>Опаздываете</h3><p>Позвоните нам. Если вы предупредили, подождём <strong>до 30 минут</strong>. При большем опоздании запись придётся перенести, чтобы не нарушить график других клиентов.</p></article>
+      <article class="rule"><h3>Не можете приехать</h3><p>Сообщите заранее - лучше за день или хотя бы за несколько часов. Мы предложим другое время. Если вы не предупредили:</p><ul><li>позвоним дважды, начиная с 10-й минуты;</li><li>если не дозвонимся, освободим окно.</li></ul></article>
+      <article class="rule"><h3>Не ответили на звонок</h3><p>Мы отправим СМС, повторим звонок через час и попробуем связаться позже. Перезвоните, когда будет удобно.</p></article>
+    </div>
 
-  <div class="box warn">
-    <div class="t">⚠️ Важно про сроки</div>
-    <p>Мы не можем начать ремонт до получения официального согласования от страховой. Все вопросы по срокам согласования — в компетенции вашей страховой компании.</p>
-  </div>
-  <div class="pnum">Град-Сервис · 2</div>
+    <div class="note good"><strong>Можно приехать раньше</strong>Скажите менеджеру, что готовы приехать при освобождении окна. Если время появится, мы позвоним и предложим более раннюю запись.</div>
+  </main>
+  <footer class="footer"><span>Град-Сервис · памятка клиента</span><span>Телефон по записи: 8 922 652 63 70</span></footer>
 </section>
 
-<!-- ================= СТРАНИЦА 3: организационные вопросы ================= -->
-<section class="page">
-  <h2><span class="ic">⏰</span> Организационные моменты</h2>
+<section class="sheet">
+  <div class="topbar"></div>
+  <header class="header">
+    <div class="brand"><div class="mark">Г</div><div><div class="brand-name">Град-Сервис</div><div class="brand-sub">Ответы на частые вопросы</div></div></div>
+    <div class="page-label">Вопросы и контакты<br>страница 3 из 3</div>
+  </header>
+  <main class="content">
+    <h1>Коротко о главном</h1>
+    <div class="summary">
+      <div><strong>Чистый автомобиль</strong><span>Иначе повреждения нельзя корректно зафиксировать.</span></div>
+      <div><strong>Решение за страховой</strong><span>Начинаем ремонт только после официального согласования.</span></div>
+      <div><strong>Предупредите заранее</strong><span>Если опаздываете или не можете приехать.</span></div>
+    </div>
 
-  <h3>Если вы опаздываете</h3>
-  <p>Обязательно предупредите нас по телефону. Мы подождём <b>до 30 минут</b> при условии, что вы предупредили. Если опоздание больше 30 минут — придётся перенести запись на другой день, чтобы не срывать график остальных клиентов.</p>
+    <div class="faq-grid">
+      <article class="faq"><div class="q">Кто вы и почему меня направили к вам?</div><p>Мы - партнёр вашей страховой компании. Проводим осмотр и ремонт, а документы передаём страховой самостоятельно.</p></article>
+      <article class="faq"><div class="q">Сколько будет стоить ремонт?</div><p>Стоимость согласовывается со страховой. Вы не платите нам напрямую; исключение - предусмотренная договором франшиза. Детали расчёта уточняйте в страховой.</p></article>
+      <article class="faq"><div class="q">Когда мне позвонят и начнётся ремонт?</div><p>Позвоним сразу после получения согласования и предложим даты. До решения страховой начать ремонт нельзя.</p></article>
+      <article class="faq"><div class="q">Сколько ждать согласования?</div><p>Обычно около 5-7 дней, но срок зависит от страховой и загрузки её специалистов. Точный статус можно уточнить напрямую в страховой.</p></article>
+      <article class="faq"><div class="q">Можно присутствовать при осмотре или ремонте?</div><p>Да. На осмотре специалисты покажут повреждения и ответят на вопросы. Техническую консультацию по ремонту также можно получить на месте.</p></article>
+      <article class="faq"><div class="q">Почему в документах другой адрес?</div><p>Это может быть юридический адрес или другое подразделение. Фактический адрес осмотра и ремонта: <strong>ул. Кропоткина, 50</strong>.</p></article>
+      <article class="faq"><div class="q">Что делать, если не могу найти въезд?</div><p>Позвоните Денису по номеру <strong>8 993 313 30 03</strong> - он сориентирует. На первой странице также есть активные ссылки на карту и видео.</p></article>
+      <article class="faq"><div class="q">Что будет, если приехать на грязной машине?</div><p>По возможности осмотрим позже в тот же день. Если в графике нет времени, перенесём запись. Пожалуйста, заранее вымойте автомобиль.</p></article>
+    </div>
 
-  <h3>Если не можете приехать</h3>
-  <p>Сообщите <b>заранее</b> — лучше за день или хотя бы за несколько часов. Мы перенесём вас на другое удобное время и предложим освободившееся окно другому клиенту.</p>
-  <p>Если вы не предупредили и не приехали, мы:</p>
-  <ul>
-    <li>позвоним вам два раза (начиная с 10-й минуты опоздания);</li>
-    <li>если не дозвонимся — освободим окно для других клиентов.</li>
-  </ul>
-
-  <h3>Если не отвечаете на наши звонки</h3>
-  <p>Понимаем, что вы можете быть заняты. Если не дозвонимся с первого раза, мы:</p>
-  <ul>
-    <li>отправим СМС с просьбой перезвонить;</li>
-    <li>попробуем связаться повторно через час;</li>
-    <li>если связи нет — продолжим попытки позже. Для удобства просим перезвонить нам, когда будет возможность.</li>
-  </ul>
-
-  <div class="box warn">
-    <div class="t">🚿 Приехали на грязной машине?</div>
-    <p>Осмотр грязного автомобиля не проводится — мы не сможем качественно зафиксировать повреждения, а это важно для страховой. Если приедете на грязной машине: по возможности подождём и осмотрим позже в тот же день; если время не позволяет — перенесём запись. <b>Пожалуйста, приезжайте на чистом автомобиле!</b></p>
-  </div>
-  <div class="pnum">Град-Сервис · 3</div>
-</section>
-
-<!-- ================= СТРАНИЦА 4: FAQ ================= -->
-<section class="page">
-  <h2><span class="ic">❓</span> Частые вопросы</h2>
-  <div class="faq">
-    <p class="q">Кто вы и почему я должен приехать именно к вам?</p>
-    <p class="a">Мы — партнёр вашей страховой компании. Страховая направила ваш автомобиль к нам для осмотра и ремонта. Мы работаем напрямую со страховой: все документы передаём им, вам не нужно заниматься этим самостоятельно.</p>
-
-    <p class="q">Сколько будет стоить ремонт?</p>
-    <p class="a">Стоимость согласовывается со страховой. Вы не оплачиваете ремонт напрямую — все расчёты проходят через страховую. Вопросы по стоимости — в вашу страховую компанию. Исключение — случаи оплаты по франшизе.</p>
-
-    <p class="q">Когда мне позвонят? Когда начнётся ремонт?</p>
-    <p class="a">После осмотра мы передаём документы в страховую. Как только поступит согласование — сразу свяжемся с вами и предложим даты ремонта. Срок согласования зависит от страховой, повлиять на него мы не можем.</p>
-
-    <p class="q">Сколько ждать согласования от страховой?</p>
-    <p class="a">Зависит от вашей страховой и загруженности их специалистов. Как только получаем согласование — сразу звоним. Уточнить статус можно напрямую в своей страховой.</p>
-
-    <p class="q">Можно приехать раньше, если освободится окно?</p>
-    <p class="a">Да! Сообщите об этом менеджеру при записи — если появится свободное время, мы перезвоним и предложим приехать раньше.</p>
-
-    <p class="q">Почему в документах страховой указан другой адрес?</p>
-    <p class="a">Там может быть юридический адрес или адрес другого подразделения. Осмотр и ремонт — по нашему фактическому адресу: ул. Кропоткина, 50. Это нормальная практика, не переживайте.</p>
-
-    <p class="q">Можно присутствовать при осмотре или ремонте?</p>
-    <p class="a">Да. При осмотре специалисты покажут все повреждения и ответят на вопросы по автомобилю. По техническим вопросам ремонта тоже можно получить консультацию на месте.</p>
-
-    <p class="q">Что делать, если не могу найти ваш адрес?</p>
-    <p class="a">Позвоните нам — сориентируем. Также можно воспользоваться ссылкой на карты (страница 1).</p>
-  </div>
-
-  <div class="foot">С уважением, команда «Град-Сервис» 🤝</div>
-  <div class="pnum">Град-Сервис · 4</div>
+    <div class="closing">
+      <div><strong>Остались вопросы? Позвоните нам.</strong><br><span>С уважением, команда «Град-Сервис»</span></div>
+      <div class="contacts" style="margin:0; min-width:88mm">
+        <div class="contact"><small>Как проехать - Денис</small><a href="tel:+79933133003">8 993 313 30 03</a></div>
+        <div class="contact"><small>Запись - Анна</small><a href="tel:+79226526370">8 922 652 63 70</a></div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><span>Град-Сервис · памятка клиента</span><span>ул. Кропоткина, 50</span></footer>
 </section>
 
 </body>
