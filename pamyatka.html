@@ -227,5 +227,23 @@
   <footer class="footer"><span>Град-Сервис · памятка клиента</span><span>ул. Кропоткина, 50</span></footer>
 </section>
 
+<script>
+/* Адаптив под телефон: A4-лист (190мм) масштабируем, чтобы влезал по ширине экрана.
+   Сам макет и печать не меняются (перед печатью zoom сбрасывается). */
+(function () {
+  var SHEET_PX = 718; // 190мм ≈ 718px
+  function fit() {
+    var vw = document.documentElement.clientWidth;
+    var scale = vw < 740 ? Math.min(1, (vw - 12) / SHEET_PX) : 1;
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.zoom = scale === 1 ? '' : scale; });
+    document.body.style.background = vw < 740 ? '#fff' : '';
+  }
+  function reset() { document.querySelectorAll('.sheet').forEach(function (s) { s.style.zoom = ''; }); }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('beforeprint', reset);
+  window.addEventListener('afterprint', fit);
+})();
+</script>
 </body>
 </html>
